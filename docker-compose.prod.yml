@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  nginx:
+    container_name: react-shoping-cart-nginx
+    build:
+      context: .
+      dockerfile: ./Dockerfile.prod
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - "./nginx/default.conf:/etc/nginx/conf.d/default.conf"
