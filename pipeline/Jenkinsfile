@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+    stages {
+        stage('GitHub Clone Preparation') {
+            steps {
+                echo 'Cloning Repository'
+                withCredentials([gitUsernamePassword(credentialsId: 'github-token')]) {
+                    git  url: 'https://github.com/aslamabid/react-docker-nginx.git', branch: 'master'
+                }
+            }
+        }
+    }
+}
