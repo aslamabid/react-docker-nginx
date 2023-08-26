@@ -16,7 +16,7 @@ pipeline {
         stage('build') {
             steps {
                 echo 'building image'
-                sh 'docker build -t ${IMAGE_NAME_DOC} .'
+                sh 'docker build -f docker-compose.prod.yml -t ${IMAGE_NAME_DOC} .'
             }
         }
     }
