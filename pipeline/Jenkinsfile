@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment { 
+        IMAGE_NAME_DOC = "mukeshphulwani66/pipelinedemo:${BUILD_NUMBER}"
+    }
     stages {
         stage('GitHub Clone Preparation') {
             steps {
@@ -7,6 +10,13 @@ pipeline {
                 withCredentials([gitUsernamePassword(credentialsId: 'github-token')]) {
                     git  url: 'https://github.com/aslamabid/react-docker-nginx.git', branch: 'master'
                 }
+            }
+        }
+
+        stage('build') {
+            steps {
+                echo 'building image'
+                sh 'docker build -t ${IMAGE_NAME_DOC} .'
             }
         }
     }
